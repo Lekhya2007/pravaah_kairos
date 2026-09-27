@@ -66,9 +66,6 @@ export default function AboutSection() {
       id="about"
       className="relative min-h-[90vh] sm:min-h-[100vh] w-full bg-transparent text-white py-8 sm:py-20 px-4 sm:px-8 flex flex-col justify-between items-center overflow-hidden [perspective:1500px] z-10"
     >
-      {/* SEAMLESS TOP GRADIENT BLEND WITH HERO SECTION */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020208] via-[#020208]/80 to-transparent pointer-events-none z-10" />
-
       {/* HIGH-CONTRAST NEON AMBIENT GLOW BACKDROP */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[radial-gradient(ellipse_at_center,rgba(0,242,254,0.16)_0%,rgba(243,85,218,0.12)_40%,transparent_75%)] blur-3xl pointer-events-none" />
 

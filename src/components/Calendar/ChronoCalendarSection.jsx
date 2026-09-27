@@ -147,9 +147,6 @@ export default function ChronoCalendarSection({ onRegisterEvent }) {
       id="calendar"
       className="w-full min-h-[115vh] relative bg-transparent text-white py-16 px-4 sm:px-8 flex flex-col justify-between items-center overflow-hidden z-10 [perspective:1200px]"
     >
-      {/* SEAMLESS TOP & BOTTOM GRADIENT FADES */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020208] via-[#020208]/80 to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-[#020208]/80 to-[#020208] pointer-events-none z-10" />
       {/* AMBIENT RADIAL LIGHTING */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,254,0.12)_0%,rgba(243,85,218,0.04)_45%,transparent_80%)] pointer-events-none" />
 

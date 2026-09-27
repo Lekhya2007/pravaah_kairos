@@ -8,7 +8,7 @@ export default function Footer({ onOpenRegister, onOpenProfile }) {
   };
 
   return (
-    <footer id="contact" className="relative pt-24 pb-12 w-full bg-[#020208] text-white overflow-hidden z-10">
+    <footer id="contact" className="relative pt-24 pb-12 w-full bg-transparent text-white overflow-hidden z-10">
       
       {/* Soft Ambient Radial Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(0,242,254,0.12)_0%,rgba(243,85,218,0.06)_45%,transparent_75%)] blur-3xl pointer-events-none" />

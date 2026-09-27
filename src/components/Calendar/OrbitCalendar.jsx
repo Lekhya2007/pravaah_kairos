@@ -226,9 +226,6 @@ export default function OrbitCalendar({ onRegisterEvent }) {
       style={{ height: `calc(100vh + ${scrollDistancePx}px)`, position: 'relative' }}
       className="w-full bg-transparent text-white events-scroll-track z-10"
     >
-      {/* SEAMLESS TOP GRADIENT BLEND WITH PREVIOUS SECTION */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020208] via-[#020208]/80 to-transparent pointer-events-none z-30" />
-
       {/* PINNED VIEWPORT CANVAS WITH 3D PERSPECTIVE (1200px) */}
       <div
         ref={pinContainerRef}

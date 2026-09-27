@@ -204,8 +204,6 @@ export default function HeroSection({ onOpenRegister }) {
 
       </motion.div>
 
-      {/* SEAMLESS BOTTOM GRADIENT TRANSITION BLENDING HERO INTO ABOUT SECTION */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-[#020208]/60 to-[#020208] pointer-events-none z-20" />
     </section>
   );
 }
