@@ -64,7 +64,7 @@ export default function AboutSection() {
     /* 1. VIEWPORT 3D CANVAS CONTEXT */
     <section
       id="about"
-      className="relative min-h-[90vh] sm:min-h-[100vh] w-full bg-[#020208] text-white py-8 sm:py-20 px-4 sm:px-8 flex flex-col justify-between items-center overflow-hidden [perspective:1500px] z-10"
+      className="relative min-h-[90vh] sm:min-h-[100vh] w-full bg-transparent text-white py-8 sm:py-20 px-4 sm:px-8 flex flex-col justify-between items-center overflow-hidden [perspective:1500px] z-10"
     >
       {/* SEAMLESS TOP GRADIENT BLEND WITH HERO SECTION */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020208] via-[#020208]/80 to-transparent pointer-events-none z-10" />

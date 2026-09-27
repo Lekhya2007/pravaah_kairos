@@ -151,7 +151,7 @@ export default function ChronoCalendarSection({ onRegisterEvent }) {
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#020208] via-[#020208]/80 to-transparent pointer-events-none z-10" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-[#020208]/80 to-[#020208] pointer-events-none z-10" />
       {/* AMBIENT RADIAL LIGHTING */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,254,0.18)_0%,rgba(243,85,218,0.06)_45%,rgba(2,2,8,0.98)_80%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,254,0.12)_0%,rgba(243,85,218,0.04)_45%,transparent_80%)] pointer-events-none" />
 
       {/* BACKGROUND DOT MATRIX */}
       <div

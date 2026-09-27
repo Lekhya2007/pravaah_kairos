@@ -61,7 +61,7 @@ export default function SpaceGalaxyBackground({ phase, onInitialRotationComplete
   ];
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-[#020208]">
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#020208]">
       
       {/* 1 & 2. FIXED PARALLAX BACKGROUND GRAPHIC (HIGH CONTRAST & BRIGHTNESS, UNCLIPPED OBJECT-FILL) */}
       <motion.div

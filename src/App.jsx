@@ -99,7 +99,7 @@ export default function App() {
   const isContentVisible = phase === 'contentFadeIn' || phase === 'ready';
 
   return (
-    <div className="relative bg-[#020208] text-gray-100 min-h-screen font-sans selection:bg-kairos-cyan selection:text-black overflow-x-hidden">
+    <div className="relative text-gray-100 min-h-screen font-sans selection:bg-kairos-cyan selection:text-black overflow-x-hidden">
       
       {/* Deep Space Background */}
       <SpaceGalaxyBackground
