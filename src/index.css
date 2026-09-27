@@ -101,3 +101,19 @@
   box-shadow: 0 0 25px rgba(34, 211, 238, 0.6), 0 0 40px rgba(168, 85, 247, 0.4);
   transform: translateY(-2px);
 }
+
+/* 3. PULSING MULTIVERSE NODES (IDLE LIFE 4S GENTLE OPACITY PULSE 60% TO 100%) */
+@keyframes multiverse-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  50% {
+    opacity: 1.0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+.animate-multiverse-pulse {
+  animation: multiverse-pulse 4s ease-in-out infinite;
+}

@@ -1,18 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
 export default function SpaceGalaxyBackground({ phase, onInitialRotationComplete }) {
-  const canvasRef = useRef(null);
+  // Mouse / Touch Parallax Coordinates (-0.5 to +0.5)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Spring physics for smooth opposite direction parallax drift
+  const smoothX = useSpring(0, { stiffness: 90, damping: 25 });
+  const smoothY = useSpring(0, { stiffness: 90, damping: 25 });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
     // Initial sequence timer trigger
     const revealTimer = setTimeout(() => {
       if (onInitialRotationComplete) {
@@ -20,74 +17,95 @@ export default function SpaceGalaxyBackground({ phase, onInitialRotationComplete
       }
     }, 500);
 
-    // Generate Subtle Deep Space Ambient Stars
-    const starCount = 300;
-    const stars = [];
-    for (let i = 0; i < starCount; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: Math.random() * 1.5 + 0.4,
-        alpha: Math.random() * 0.7 + 0.2,
-      });
-    }
+    const handleMouseMove = (e) => {
+      const { innerWidth, innerHeight } = window;
+      const normX = e.clientX / innerWidth - 0.5;
+      const normY = e.clientY / innerHeight - 0.5;
+      setMousePos({ x: normX, y: normY });
+      smoothX.set(-normX * 40); // Shifts in OPPOSITE direction of cursor
+      smoothY.set(-normY * 40);
+    };
 
-    let time = 0;
-
-    const render = () => {
-      animationFrameId = requestAnimationFrame(render);
-      time += 0.015;
-
-      // Dark Deep Space Background (#020208)
-      ctx.fillStyle = '#020208';
-      ctx.fillRect(0, 0, width, height);
-
-      // Subtle Ambient Background Glows (Cyan top left, Purple bottom right)
-      const grad1 = ctx.createRadialGradient(width * 0.2, height * 0.2, 0, width * 0.2, height * 0.2, width * 0.4);
-      grad1.addColorStop(0, 'rgba(56, 189, 248, 0.06)');
-      grad1.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = grad1;
-      ctx.fillRect(0, 0, width, height);
-
-      const grad2 = ctx.createRadialGradient(width * 0.8, height * 0.8, 0, width * 0.8, height * 0.8, width * 0.4);
-      grad2.addColorStop(0, 'rgba(168, 85, 247, 0.06)');
-      grad2.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = grad2;
-      ctx.fillRect(0, 0, width, height);
-
-      // Draw Soft Twinkling Stars
-      for (let i = 0; i < starCount; i++) {
-        const star = stars[i];
-        star.alpha += Math.sin(time + i) * 0.008;
-        const currentAlpha = Math.max(0.1, Math.min(0.85, star.alpha));
-
-        ctx.fillStyle = `rgba(224, 242, 254, ${currentAlpha})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
+    const handleTouchMove = (e) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const { innerWidth, innerHeight } = window;
+        const normX = touch.clientX / innerWidth - 0.5;
+        const normY = touch.clientY / innerHeight - 0.5;
+        setMousePos({ x: normX, y: normY });
+        smoothX.set(-normX * 40);
+        smoothY.set(-normY * 40);
       }
     };
 
-    render();
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
 
     return () => {
       clearTimeout(revealTimer);
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [phase, onInitialRotationComplete]);
+  }, [onInitialRotationComplete, smoothX, smoothY]);
+
+  // Primary node coordinates for neon-purple (left side) and electric-cyan (right side) glowing intersections
+  const pulsingNodes = [
+    { top: '15%', left: '18%', color: 'rgba(243, 85, 218, 0.95)', shadow: 'rgba(243, 85, 218, 0.8)', delay: '0s' },
+    { top: '35%', left: '8%', color: 'rgba(243, 85, 218, 0.95)', shadow: 'rgba(243, 85, 218, 0.8)', delay: '1s' },
+    { top: '55%', left: '10%', color: 'rgba(243, 85, 218, 0.95)', shadow: 'rgba(243, 85, 218, 0.8)', delay: '2s' },
+    { top: '75%', left: '22%', color: 'rgba(243, 85, 218, 0.95)', shadow: 'rgba(243, 85, 218, 0.8)', delay: '0.5s' },
+    { top: '10%', right: '18%', color: 'rgba(0, 242, 254, 0.95)', shadow: 'rgba(0, 242, 254, 0.8)', delay: '1.5s' },
+    { top: '30%', right: '12%', color: 'rgba(0, 242, 254, 0.95)', shadow: 'rgba(0, 242, 254, 0.8)', delay: '2.5s' },
+    { top: '68%', right: '15%', color: 'rgba(0, 242, 254, 0.95)', shadow: 'rgba(0, 242, 254, 0.8)', delay: '0.8s' },
+    { top: '85%', right: '28%', color: 'rgba(0, 242, 254, 0.95)', shadow: 'rgba(0, 242, 254, 0.8)', delay: '1.8s' },
+  ];
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#020208]"
-    />
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-[#020208]">
+      
+      {/* 1 & 2. FIXED PARALLAX BACKGROUND GRAPHIC (SCALE 1.1 WITH OPPOSITE DIRECTION DRIFT) */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+          scale: 1.1,
+          rotateX: -mousePos.y * 6,
+          rotateY: mousePos.x * 6,
+        }}
+        transition={{ type: 'spring', stiffness: 90, damping: 25 }}
+        className="absolute inset-0 w-full h-full flex items-center justify-center [transform-style:preserve-3d]"
+      >
+        <img
+          src="/multiverse_nodes.png"
+          alt="Multiverse Network Background"
+          className="w-full h-full object-cover select-none"
+        />
+
+        {/* 3. PULSING MULTIVERSE NODES OVERLAY (IDLE LIFE 4S OPACITY PULSE 60% TO 100%) */}
+        {pulsingNodes.map((node, i) => (
+          <div
+            key={i}
+            style={{
+              top: node.top,
+              left: node.left,
+              right: node.right,
+              animationDelay: node.delay,
+            }}
+            className="absolute w-4 h-4 rounded-full -translate-x-1/2 -translate-y-1/2 animate-multiverse-pulse pointer-events-none"
+          >
+            <div
+              style={{
+                backgroundColor: node.color,
+                boxShadow: `0 0 25px 8px ${node.shadow}`,
+              }}
+              className="w-full h-full rounded-full"
+            />
+          </div>
+        ))}
+      </motion.div>
+
+      {/* AMBIENT SOFT VIGNETTE MASK FOR VIBRANT GRAPHIC SHINE */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020208] via-transparent to-[#020208]/60 pointer-events-none" />
+    </div>
   );
 }
