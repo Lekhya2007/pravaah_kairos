@@ -63,17 +63,17 @@ export default function HeroSection({ onOpenRegister }) {
       {/* AMBIENT GLOW BACKLIGHT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(0,242,254,0.18)_0%,rgba(243,85,218,0.08)_45%,transparent_75%)] blur-3xl pointer-events-none" />
 
-      {/* 4. HERO CONTENT GLASSMORPHISM CONTAINER (IN WIDE DARK NEBULA CENTER SPACE) */}
+      {/* 100% FRAME-FREE HERO LANDING CONTENT (SEAMLESSLY MERGED WITH BACKGROUND GRAPHIC) */}
       <motion.div
         style={{
           y: titleY,
           opacity: opacityFade,
-          background: 'rgba(11, 11, 20, 0.45)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          x: smoothMouseX.get() * -40,
+          y: smoothMouseY.get() * -30,
+          rotateY: smoothMouseX.get() * -14,
+          rotateX: smoothMouseY.get() * 14,
         }}
-        className="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 py-10 sm:py-14 text-center flex flex-col items-center rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.7)] [transform-style:preserve-3d]"
+        className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center [transform-style:preserve-3d]"
       >
         
         {/* 1. FUTURISTIC CYAN BADGE */}
